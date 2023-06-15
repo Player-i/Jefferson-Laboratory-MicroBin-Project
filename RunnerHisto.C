@@ -8,53 +8,46 @@
 #include <fstream>
 #include <iostream>
 
-void RunnerHisto(){
-    
+void RunnerHisto()
+{
 
     // Creating variables in text file
     int i, l, j, k, m;
-    float  Npos, Nneg, pTmean, xmean, Q2mean, zetamean, phimean, xFmean, demean;
+    float Npos, Nneg, pTmean, xmean, Q2mean, zetamean, phimean, xFmean, demean;
 
     float etamean, pT;
 
-     // Creating Three
-    TFile *hfile = hfile = TFile::Open("PKplus2.root","RECREATE");
+    // Creating Three
+    TFile *hfile = hfile = TFile::Open("PKplus2.root", "RECREATE");
 
-
-    TTree *outTree = new TTree("T","kinematics tree");
+    // Creating variables and tree
+    TTree *outTree = new TTree("T", "kinematics tree");
     outTree->Branch("pTmean", &pTmean, "pTmean/F");
 
-
-
-
     // Opening Text File
-    
 
     // Creating Canvas
-    TCanvas* canvas = new TCanvas("canvas", "Graph", 800, 600);
-    FILE *fp = fopen("microBin.txt","r");
-   
+    TCanvas *canvas = new TCanvas("canvas", "Graph", 800, 600);
+    FILE *fp = fopen("microBin.txt", "r");
 
+    for (int g = 0; g < 1358; g++)
+    {
 
-        for(int g=0; g<1358; g++){
+        fscanf(fp, " %d %d %d %d %d %f %f %f  ", &l, &j, &i, &k, &m, &pTmean, &Npos, &Nneg);
 
-            fscanf(fp, " %d %d %d %d %d %f %f %f  ", &l, &j, &i, &k, &m, &pTmean, &Npos, &Nneg );
+        fscanf(fp, " %f %f %f %f %f ", &xmean, &Q2mean, &zetamean, &phimean, &xFmean);
 
-            fscanf(fp, " %f %f %f %f %f ", &xmean, &Q2mean, &zetamean, &phimean, &xFmean);
+        fscanf(fp, " %f %f ", &etamean, &demean);
 
-            fscanf(fp, " %f %f ", &etamean, &demean);
+        // Filling the tree and variables in it
+        outTree->Fill();
+    }
 
-	
-            
+    // Creating Histogram
+    TH1F *histogram = new TH1F("histogram", "", 20, -0.5, 2);
+    canvas->Divide(1, 1);
 
-                    outTree->Fill();
-            
-            }
-
-
-       
-    TH1F* histogram = new TH1F("histogram","",20,-0.5, 2);
-    canvas->Divide(1,1);
+    // Setting name, size and labels
     histogram->GetXaxis()->SetTitle("pT");
     histogram->GetXaxis()->SetTitleSize(0.1);
     histogram->GetXaxis()->SetLabelSize(0.05);
@@ -65,6 +58,8 @@ void RunnerHisto(){
     histogram->GetYaxis()->SetTitleOffset(0.6);
     histogram->SetLineWidth(5);
     histogram->SetStats(1);
+
+    // Drawing histogram
     outTree->Draw("pTmean>>histogram");
     canvas->Update();
 }
