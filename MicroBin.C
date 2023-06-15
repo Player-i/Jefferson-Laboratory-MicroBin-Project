@@ -181,6 +181,38 @@ float add_phi = 36;
                         outTree->Draw("de>>h9", pT1 && Q21 && X1 && ZETA1 && PHI1);
                         mean = h5->GetMean();
                         fprintf(fp1, "%f \n", mean);
+                        
+                        
+                        
+                                                h0->Delete();
+                        delete h0;
+
+                        h1->Delete();
+                        delete h1;
+
+                        h2->Delete();
+                        delete h2;
+
+                        h3->Delete();
+                        delete h3;
+
+                        h4->Delete();
+                        delete h4;
+
+                        h5->Delete();
+                        delete h5;
+
+                        h6->Delete();
+                        delete h6;
+
+                        h7->Delete();
+                        delete h7;
+
+                        h8->Delete();
+                        delete h8;
+
+                        h9->Delete();
+                        delete h9;
 
 
                         
