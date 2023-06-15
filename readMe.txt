@@ -1,4 +1,6 @@
-Files: Location ( /work/clas12/danieltc/MicroBin1.0/)  
+Guide to create a MultiDimentional table using the data of Fall 2018 and Spring 2019 (EP->EPX) (Jefferson Laboratory)
+
+Files: Location: ifarm ( /work/clas12/danieltc/MicroBin1.0/)  
 Runner: MicroBin.C https://github.com/Player-i/MicroBin-Project
 Text File: microBin.txt
 Format of Text File: #Bin in PT  | #Bin in Q2 | #Bin in x | #Bin in zeta | #Bin in phi | Mean PT | N+ | N- | Mean x | Mean Q2 | Mean zeta | Mean phi |
