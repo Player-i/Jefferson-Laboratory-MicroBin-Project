@@ -29,16 +29,12 @@ void RunnerGraph(){
     canvas->Divide(1,1);
     // Creating Graph
     TGraph* graph = new TGraph();
-    
-    // n starts from 1 until the number of bins we have
+
     for (int n=1; n <= 10; n++) {
 
-	// Initialize pT
         pT = 0;
-	    
-	// Open Textfile
         FILE *fp = fopen("microBin.txt","r");
-        for(int g=0; g<1358; g++){
+        for(int g=0; g<1350; g++){
 
             fscanf(fp, " %d %d %d %d %d %f %f %f  ", &l, &j, &i, &k, &m, &pTmean, &Npos, &Nneg );
 
@@ -46,17 +42,18 @@ void RunnerGraph(){
 
             fscanf(fp, " %f %f ", &etamean, &demean);
 
-	    // For this graph I only want the values of pT when n is equal to the number of bins of pT (l) 
+	
             if (n == l ) {
                  if (pTmean != 0) {
 
-                    pT += pTmean; 
+                    pT += pTmean;
+
                 }
             }
   
 
         };
-
+        pT = pT / 135;
         fclose(fp);
         printf("PT: %f\n", pT);
         graph->SetPoint(n, n, pT);
@@ -71,8 +68,10 @@ void RunnerGraph(){
     graph->SetMarkerStyle(20);  // Set the marker style
     graph->SetMarkerColor(kBlue);  // Set the marker color
     graph->SetLineColor(kRed);
-    graph->GetXaxis()->SetRangeUser(0.0, 10);  
-    graph->GetYaxis()->SetRangeUser(0, 22);
+    graph->GetXaxis()->SetTitle("PT Bin #");
+    graph->GetYaxis()->SetTitle("PT Value");
+    graph->GetXaxis()->SetRangeUser(0.0, 10);     //xF (-0.8, 0.6); Q2 (0.0, 6.0); pT (0.0, 1.3)
+    graph->GetYaxis()->SetRangeUser(0, 0.15);
 
 
     graph->Draw("APL");
