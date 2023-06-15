@@ -15,7 +15,7 @@ void MicroBin(){
     Float_t runnum, evnum, helicity, e_p, e_theta, e_phi, vz_e, p_p, p_theta, p_phi, vz_p, xF, W, Mx, Mx2, x, y, z, Q2, pT, zeta, eta, phi;
     Float_t da, db, dc, dd, dw, de;
     float mean, binNumber, entriesNumber;
-    FILE *fp = fopen("/work/clas12/fatiha/Depol/ProtonFall2018inbending_Eloss_Depol.QA.txt","r");
+    FILE *fp = fopen("/work/clas12/fatiha/MultiDim/Total-Depol-Eloss-QA.txt","r");
     FILE *fp1;
     fp1 = fopen ("microBin.txt", "w");
     TFile *hfile = hfile = TFile::Open("PKplus2.root","RECREATE");
